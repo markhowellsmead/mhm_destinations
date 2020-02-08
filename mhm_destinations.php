@@ -7,7 +7,7 @@
  * Author URI:      https://permanenttourist.ch/
  * Text Domain:     mhm_destinations
  * Domain Path:     /languages
- * Version:         1.0.0
+ * Version:         1.0.1
  * Requires PHP: 	7.2
  */
 
@@ -102,7 +102,7 @@ add_action('init', function () {
 		'show_in_rest' => true,
 		'show_admin_column' => true,
 		'query_var' => true,
-		'rewrite' => ['slug' => 'tagsx'],
+		'rewrite' => ['slug' => 'destination-subjects'],
 	]);
 
 	register_taxonomy('mhm_destination_region', ['mhm_destination'], [
