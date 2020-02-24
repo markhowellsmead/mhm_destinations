@@ -28,6 +28,7 @@ add_action('init', function () {
 			'menu_icon' => 'dashicons-admin-site-alt',
 			'menu_position' => 10,
 			'has_archive' => true,
+			'hierarchical' => true,
 			'public' => true,
 			'show_in_rest' => true,
 			'rest_base' => 'destinations',
@@ -38,6 +39,7 @@ add_action('init', function () {
 				'title',
 				'editor',
 				'thumbnail',
+				'page-attributes'
 			],
 			'labels' => [
 				'name' => _x('Destinations', 'CPT name', 'mhm_destination'),
@@ -65,10 +67,6 @@ add_action('init', function () {
 				'item_reverted_to_draft' => _x('Destination reverted to draft status.', 'Label for name admin bar', 'mhm_destination'),
 				'item_scheduled' => _x('Destination scheduled.', 'Label for name admin bar', 'mhm_destination'),
 				'item_updated' => _x('Destination updated.', 'Label for name admin bar', 'mhm_destination'),
-				// 'featured_image' => _x('Featured image', 'Custom post type label', 'mhm_destination'),
-				// 'set_featured_image' => _x('Set featuried image', 'Custom post type label', 'mhm_destination'),
-				// 'remove_featured_image' => _x('Remove destination image', 'Custom post type label', 'mhm_destination'),
-				// 'use_featured_image' => _x('Use as destination image', 'Custom post type label', 'mhm_destination'),
 			]
 		]
 	);
@@ -183,54 +181,63 @@ add_action('init', function () {
 		// ));
 
 		acf_add_local_field_group(array(
-		'key' => 'group_related',
-		'title' => 'Attributes',
-		'fields' => array(
-		array(
-			'key' => 'related_destinations',
-			'label' => 'Related destinations',
-			'name' => 'related_destinations',
-			'type' => 'relationship',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array(
-				'width' => '',
-				'class' => '',
-				'id' => '',
+			'key' => 'group_5e540de5363b3',
+			'title' => 'Related destinations',
+			'fields' => array(
+				array(
+					'key' => 'field_5e540dea6b5d3',
+					'label' => 'Select destinations',
+					'name' => 'related_destinations',
+					'type' => 'post_object',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'post_type' => array(
+						0 => 'mhm_destination',
+					),
+					'taxonomy' => '',
+					'allow_null' => 1,
+					'multiple' => 1,
+					'return_format' => 'object',
+					'ui' => 1,
+				),
 			),
-			'post_type' => array(
-				0 => 'mhm_destination',
+			'location' => array(
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'post',
+					),
+				),
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'photo',
+					),
+				),
+				array(
+					array(
+						'param' => 'post_type',
+						'operator' => '==',
+						'value' => 'mhm_destination',
+					),
+				),
 			),
-			'taxonomy' => '',
-			'filters' => array(
-				0 => 'search',
-			),
-			'elements' => array(
-				0 => 'featured_image',
-			),
-			'min' => '',
-			'max' => '',
-			'return_format' => 'object',
-		),
-		),
-		'location' => array(
-		array(
-			array(
-				'param' => 'post_type',
-				'operator' => '==',
-				'value' => 'mhm_destination',
-			),
-		),
-		),
-		'menu_order' => 0,
-		'position' => 'side',
-		'style' => 'default',
-		'label_placement' => 'top',
-		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
-		'active' => true,
-		'description' => '',
+			'menu_order' => 0,
+			'position' => 'side',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
 		));
 	endif;
 });
